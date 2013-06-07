@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Trash bucket with scores</title>
+    <style>
+        #save-name {
+            display: none;
+        }
+
+        img {
+            position: absolute;
+        }
+            img#closed {
+                top: 38px;
+                left: 44px;
+                height: 150px;
+            }
+            img#opened {
+                height: 150px;
+                top: 50px;
+                display: none;
+            }
+
+        div#scores {
+            float: right;
+            height: 200px;
+            width: 200px;
+            border: 2px solid black;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <form id="save-name">
+        <label for="player-name">Enter your name:</label>
+        <input type="text" id="player-name" name="player-name" />
+        <button onclick="onSaveButtonClick()">Save</button>
+    </form>
+    <img id="closed" draggable="false" ondrop="drop(event)" ondragover="allowDrop(event)" src="images/TrashBinClosed.png" />
+    <img id="opened" ondrop="drop(event)" ondragover="allowDrop(event)" src="images/TrashBinOpened.png" />
+    <img class="trash" id="tr1" draggable="true" ondragstart="drag(event)" src="images/trash.png" />
+	<img class="trash" id="tr2" draggable="true" ondragstart="drag(event)" src="images/trash.png" />
+	<img class="trash" id="tr3" draggable="true" ondragstart="drag(event)" src="images/trash.png" />
+	<img class="trash" id="tr4" draggable="true" ondragstart="drag(event)" src="images/trash.png" />
+    <img class="trash" id="tr5" draggable="true" ondragstart="drag(event)" src="images/trash.png" />
+	<img class="trash" id="tr6" draggable="true" ondragstart="drag(event)" src="images/trash.png" />
+	<img class="trash" id="tr7" draggable="true" ondragstart="drag(event)" src="images/trash.png" />
+	<img class="trash" id="tr8" draggable="true" ondragstart="drag(event)" src="images/trash.png" />
+	<img class="trash" id="tr9" draggable="true" ondragstart="drag(event)" src="images/trash.png" />
+	<img class="trash" id="tr10" draggable="true" ondragstart="drag(event)" src="images/trash.png" />
+    <div id="scores"></div>
+
+    <script src="scripts/TrashBucketWithScores.js" type="text/javascript"></script>
+</body>
+</html>

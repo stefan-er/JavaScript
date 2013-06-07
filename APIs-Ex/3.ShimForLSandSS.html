@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Shim for localStorage and sessionStorage</title>
+</head>
+<body>
+    <script src="scripts/ShimForLocalStorage.js"></script>
+    <script src="scripts/ShimForSessionStorage.js"></script>
+    <script>
+        //newLocalStorage.setItem("key2", "value2");
+        //newLocalStorage.setItem("key3", "value3");
+        //newLocalStorage.setItem("key4", "value4");
+
+        console.log(document.cookie);
+        newLocalStorage.removeItem("key3");
+        console.log(document.cookie);
+
+        console.log(newLocalStorage.getItem("key2"));
+        console.log(newLocalStorage.length());
+
+        console.log(" ");
+        
+        //newSessionStorage.setItem("sesKey1", "sesValue1");
+        console.log(newSessionStorage.getItem("sesKey1"));
+    </script>
+</body>
+</html>

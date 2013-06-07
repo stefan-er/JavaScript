@@ -1,0 +1,33 @@
+﻿<!--TASK CONDITIONS:
+Write a function to count the number of divs on the web page-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Find Div Tags In Document</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <!--<a href="#" id="btn-N" onclick="howManyDivsBtnClick()">Count &lsaquo;div&rsaquo;</a>-->
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js">	  
+    </script>
+    <script>
+        var string = "div";
+        jsConsole.writeLine(howManyDivsBtnClick(string));
+
+        function howManyDivsBtnClick(tag) {
+            var divArray = document.getElementsByTagName(tag);
+            var count = divArray.length;
+            return count;
+        }
+        
+    </script>
+</body>
+</html>

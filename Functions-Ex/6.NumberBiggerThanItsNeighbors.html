@@ -1,0 +1,45 @@
+﻿<!--TASK CONDITIONS:
+Write a function that checks if the element at given position in given array of integers is bigger than its two neighbors (when such exist).-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Number bigger than it's neighbour</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <label for="tb-array">Numbers divided by comma: </label>
+	<input type="text" id="tb-array" />
+	<br />
+
+    <label for="tb-number">Index: </label>
+	<input type="text" id="tb-number" />
+	<br />
+
+    <a href="#" id="btn-N" onclick="numberInArrayBtnClick()">Is bigger than its neigbours</a>
+
+	<div id="js-console">
+    </div>
+    <script src="scripts/js-console.js">	  
+    </script>
+	<script>
+	    function numberInArrayBtnClick() {
+	        var givenArray = jsConsole.readNumbersArray("#tb-array", ",");
+	        var givenIndex = jsConsole.readInteger("#tb-number");
+	        jsConsole.writeLine(biggerNumberThanItsNeighbors(givenIndex, givenArray));
+	    }
+
+        function biggerNumberThanItsNeighbors(index, array){
+            if (index > array.length - 1 || index < 0) {
+                return "There is no such index in the array";
+            }
+
+	        if (array[index] > array[index - 1] && array[index] > array[index + 1]) {
+	            return true;
+	        }
+	        else {
+	            return false;
+	        }      
+        }
+	</script>
+</body>
+</html>

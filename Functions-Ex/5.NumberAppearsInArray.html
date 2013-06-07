@@ -1,0 +1,43 @@
+﻿<!--TASK CONDITIONS:
+Write a function that counts how many times given number appears in given array. Write a test function to check if the function is working correctly.-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Find how many times the number appears in the array</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <label for="tb-array">Numbers divided by comma: </label>
+	<input type="text" id="tb-array" />
+	<br />
+
+    <label for="tb-number">Number: </label>
+	<input type="text" id="tb-number" />
+	<br />
+
+    <a href="#" id="btn-N" onclick="howManyTimesBtnClick()">How many times</a>
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js">	  
+    </script>
+    <script>
+        function howManyTimesBtnClick() {
+            var givenArray = jsConsole.readNumbersArray("#tb-array",",");
+            var givenNumber = jsConsole.readInteger("#tb-number");
+            jsConsole.writeLine(howManyTimesANumberInArray(givenNumber, givenArray));
+        }
+
+        function howManyTimesANumberInArray(number, array) {
+            var count = new Number;
+
+            for (var i = 0; i < array.length; i++) {
+                if (number == array[i]) {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+    </script>
+</body>
+</html>

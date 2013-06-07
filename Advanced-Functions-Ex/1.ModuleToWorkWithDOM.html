@@ -1,0 +1,108 @@
+﻿<!--TASK CONDITIONS:
+Create a module for working to work with DOM. The module should have the following functionality
+Add element to parent element by given selector
+Remove element from the DOM  by given selector 
+Attach event to given selector by given event type and event hander
+Add elements to buffer, which appends them to the DOM when their for some selector count becomes 100
+The buffer contains elements for each selector it gets
+Get elements by CSS selector
+The module should reveal only the methods-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Module work with DOM</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <a href="#" class="button">Button</a>
+        <nav id="main-nav">
+            <ul id="firstList">
+                <li id="firstUl">one</li>
+                <li>two</li>
+                <li>tree</li>
+                <li>four</li>
+            </ul>
+            <ul id="secondList">
+                <li id="secondUl">one</li>
+                <li>two</li>
+                <li>tree</li>
+                <li>four</li>
+            </ul>
+            <ul id="thirdList">
+                <li id="thirdUl ">one</li>
+                <li>two</li>
+                <li>tree</li>
+                <li>four</li>
+            </ul>
+        </nav>
+        <div id="container"></div>
+    </div>
+    <script>
+        (function () {
+            'use strict';
+
+            var domModule = (function () {
+
+                function appendChild(tagName, id) {
+                    var parrentElement = document.querySelector(id);
+                    parrentElement.appendChild(tagName);
+                }
+
+                function removeChild(parrent, child) {
+                    var parrentElements = document.querySelectorAll(parrent);
+                    var childElement = child.concat("-of-type");
+                    for (var i = 0; i < parrentElements.length; i++) {  
+                        parrentElements[i].removeChild(parrentElements[i].querySelector(childElement));
+                    }
+                }
+
+                function addHandler(selector, eventName, listener) {
+                    document.querySelector(selector).addEventListener(eventName, listener, false);
+                }
+
+                function appendToBuffer(selector, func) {
+                    var parrentElement = new Object;
+
+                    if (selector[0] == '#' || selector[0] == '.') {
+                        var splitedSelector = selector.split(" ");
+                        parrentElement = document.querySelector(splitedSelector[0]);
+                        var childElement = document.createElement(splitedSelector[1]);
+                        parrentElement.appendChild(childElement);
+                    }
+                    else {                    
+                        parrentElement = document.getElementById(selector);
+                        parrentElement.appendChild(func);
+                    }                  
+                }
+
+                return {
+                    appendChild: appendChild,
+                    removeChild: removeChild,
+                    addHandler: addHandler,
+                    appendToBuffer: appendToBuffer
+                }
+            })();
+
+            var div = document.createElement("div");
+
+            //change the div
+            domModule.appendChild(div, "#wrapper");
+
+            //remove the first li from each ul
+            domModule.removeChild("ul", "li:first");
+
+            //adds event to element
+            domModule.addHandler("a.button", 'click', function () { alert("Clicked by you"); });
+
+            //adds div element with cloneNode method to element with id="container"
+            domModule.appendToBuffer("container", div.cloneNode(true));
+
+            //separates the string "#main-nav ul" on two parts and adds an "ul" element to element with id="main-nav"
+            var navItem = "";
+            domModule.appendToBuffer("#main-nav ul", navItem);
+        })();
+    </script>
+</body>
+</html>

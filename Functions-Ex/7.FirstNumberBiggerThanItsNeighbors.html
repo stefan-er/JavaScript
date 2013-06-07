@@ -1,0 +1,40 @@
+﻿<!--TASK CONDITIONS:
+Write a Function that returns the index of the first element in array that is bigger than its neighbors, or -1, if there’s no such element.
+Use the function from the previous exercise.-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>First number bigger than it's neighbour</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <label for="tb-array">Numbers divided by comma: </label>
+	<input type="text" id="tb-array" />
+	<br />
+
+    <a href="#" id="btn-N" onclick="numberInArrayBtnClick()">Is there number bigger than neighbours</a>
+
+	<div id="js-console">
+    </div>
+    <script src="scripts/js-console.js">	  
+    </script>
+	<script>
+        function numberInArrayBtnClick() {
+	        var givenArray = jsConsole.readNumbersArray("#tb-array", ",");
+	        jsConsole.writeLine("The index is: " + firstBiggerNumberThanItsNeighbors(givenArray));
+        }
+	    
+        function firstBiggerNumberThanItsNeighbors(array){
+
+            for (var index = 0; index < array.length; index++) {
+                if (array[index] > array[index - 1] && array[index] > array[index + 1]) {
+                    return index;
+                }
+                if (index == array.length - 1) {
+                    return -1;
+                }
+			}     
+        }
+	</script>
+</body>
+</html>

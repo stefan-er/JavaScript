@@ -1,0 +1,47 @@
+﻿<!--TASK CONDITIONS:
+Write a script that finds the lexicographically smallest and largest property in document, window and navigator objects-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Lexicographically smallest and largest property in document, window and navigator</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <p>Find lexicographically smallest and largest property in document, window and navigator</p>
+	<a href="#" id="btn-compare" onclick="smallestAndLargestBtnClick()">FindSmallestAndLargest</a>
+	<div id="js-console">
+	</div>
+	<script src="scripts/js-console.js">	  
+	</script>
+	<script>
+	    function smallestAndLargestBtnClick() {
+
+	        findSmallest(window);
+	        findBiggest(window);
+	        findSmallest(navigator);
+	        findBiggest(navigator);
+	        findSmallest(document);
+	        findBiggest(document);
+
+	        function findSmallest(object) {
+	            var smallest = 'zzz';
+	            for (var property in object) {
+	                if (property < smallest) {
+	                    smallest = property;
+	                }
+	            }
+	            jsConsole.writeLine("The smallest lexicographically property in " + object + " is " + smallest);
+	        }
+	        function findBiggest(object) {
+	            var biggest = 'AAA';
+	            for (var property in object) {
+	                if (property > biggest) {
+	                    biggest = property;
+	                }
+	            }
+	            jsConsole.writeLine("The biggest lexicographically property in " + object + " is " + biggest);
+	        }
+	    }
+	</script>
+</body>
+</html>

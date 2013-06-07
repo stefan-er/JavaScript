@@ -1,0 +1,32 @@
+﻿<!--TASK CONDITIONS:
+Write a function that reverses the digits of given decimal number. Example: 256 ? 652-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Reverse a given number</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <label for="tb-number">Number: </label>
+	<input type="text" id="tb-number" />
+	<br />
+
+    <a href="#" id="btn-N" onclick="ReverseNumberBtnClick()">Reverse number</a>
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js">	  
+    </script>
+    <script>
+        function ReverseNumberBtnClick() {
+
+            var number = jsConsole.readInteger("#tb-number");
+            var numberStr = number.toString();
+            var reversedNumber = new Number;
+            for (var i = 0; i < numberStr.length; i++) {
+                reversedNumber += numberStr[i] * Math.pow(10, i);
+            }
+            jsConsole.writeLine(reversedNumber);
+        }
+    </script>
+</body>
+</html>

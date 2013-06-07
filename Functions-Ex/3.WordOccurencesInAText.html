@@ -1,0 +1,98 @@
+﻿<!--TASK CONDITIONS:
+Write a function that finds all the occurrences of word in a text
+The search can case sensitive or case insensitive
+Use function overloading-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>WordOccurencesInAText</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <h3>THE TEXT</h3>
+    <p id="text">
+        Mother ultrices cola non ante molestie euismod.
+        <br />
+        Duis cola vitae Cola enim, id scelerisque lacus.
+        <br />
+        Etiam condimentum euismod dignissim Cola, at scelerisque eros posuere a.
+        <br />
+        Vestibulum sed neque metus, in facilisis mother. Nunc placerat odio tellus.
+        <br />
+        Donec vel erat cola. Etiam interdum mother posuere. Curabitur at augue vitae.
+    </p>
+
+    <!--<label for="tb-word">Word: </label>
+	<input type="text" id="tb-word" />
+	<br />-->
+
+    <p>
+        The searched word is "cola";
+    </p>
+
+    <a href="#" id="btn-N" onclick="WordOccurencesBtnClick()">Word occure</a>
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js">	  
+    </script>
+    <script>
+        function WordOccurencesBtnClick() {
+
+            var searchedWord = "cola";
+            var givenText = jsConsole.read("#text");
+            jsConsole.writeLine(findWord(givenText, searchedWord));
+            jsConsole.writeLine(findWord(givenText, searchedWord, true));
+            jsConsole.writeLine(findWord(givenText, searchedWord, false));
+        }
+
+        function findWord(text, word, isCaseSensitive) {
+            function findWordCaseInsensitive() {
+                text = text.toLowerCase();
+                word = word.toLowerCase();
+                var count = 0;
+
+                for (var i = 0; i < text.length; i++) {
+                    if (word[0] == text[i]) {
+                        for (var j = 1; j < word.length; j++) {
+                            if (word[j] != text[i + j]) {
+                                break;
+                            }
+                            if (j == word.length - 1) {
+                                count++;
+                            }
+                        }
+                    }
+                }
+
+                return count;
+            }
+
+            function findWordCaseSensitive() {
+                var count = 0;
+
+                for (var i = 0; i < text.length; i++) {
+                    if (word[0] == text[i]) {
+                        for (var j = 1; j < word.length; j++) {
+                            if (word[j] != text[i + j]) {
+                                break;
+                            }
+                            if (j == word.length - 1) {
+                                count++;
+                            }
+                        }
+                    }
+                }
+
+                return count;
+            }
+
+            switch (arguments.length) {
+                case 2:
+                    return findWordCaseInsensitive(text, word);
+                case 3:
+                    return isCaseSensitive ? findWordCaseSensitive(text, word) : findWordCaseInsensitive(text, word);
+            }
+        }
+    </script>
+</body>
+</html>

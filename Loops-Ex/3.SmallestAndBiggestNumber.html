@@ -1,0 +1,50 @@
+﻿<!--TASK CONDITIONS:
+Write a script that finds the max and min number from a sequence of numbers-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Smallest and biggest number</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<label for="tb-number">how many elements you will compare:</label>
+	<input type="text" id="tb-number" />
+	<br />
+
+	<a href="#" id="btn-compare" onclick="biggestAndSmallestBtnClick()">Compare numbers</a>
+	<div id="js-console">
+	</div>
+	<script src="scripts/js-console.js">	  
+	</script>
+	<script>
+	    function biggestAndSmallestBtnClick() {
+
+	        var nStr = document.getElementById("tb-number").value; //Gets values from the input separated by comma
+	        var n = nStr.split(","); //Add values from the input to n[] array
+
+            /*Next for loop parses all the elements of n[] from string data type to int data type*/
+	        for (var i = 0; i < n.length; i++) {
+	            n[i] = parseInt(n[i])
+	        }
+
+	        /*Next two for loops check which is the smallest and the biggest element from the n[] array*/
+	        var smallestNumber = n[0];
+	        for (var i = 0; i < n.length; i++) {
+	            if (n[i] < smallestNumber) {
+	                smallestNumber = n[i];
+	            }
+	        }
+
+	        var biggestNumber = n[0];
+	        for (var i = 0; i < n.length; i++) {
+	            if (n[i] > biggestNumber) {
+	                biggestNumber = n[i];
+	            }
+	        }
+
+	        jsConsole.writeLine("The smallest number is: " + smallestNumber);
+	        jsConsole.writeLine("The biggest number is: " + biggestNumber);
+	    }
+	</script>
+</body>
+</html>

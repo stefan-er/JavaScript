@@ -1,0 +1,39 @@
+﻿<!--TASK CONDITIONS:
+Write a function that returns the last digit of given integer as an English word. Examples: 512 ? "two", 1024 ? "four", 12309 ? "nine"-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>LastDigitOfNumberAsWord</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <label for="tb-number">Number: </label>
+	<input type="text" id="tb-number" />
+	<br />
+
+    <a href="#" id="btn-N" onclick="ShowLastDigitBtnClick()">Show Last digit</a>
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js">	  
+    </script>
+    <script>
+        function ShowLastDigitBtnClick() {
+            var number = jsConsole.readInteger("#tb-number");
+            var lastDigit = number % 10;
+            switch (lastDigit) {
+                case 0: jsConsole.writeLine("zero"); break;
+                case 1: jsConsole.writeLine("one"); break;
+                case 2: jsConsole.writeLine("two"); break;
+                case 3: jsConsole.writeLine("tree"); break;
+                case 4: jsConsole.writeLine("four"); break;
+                case 5: jsConsole.writeLine("five"); break;
+                case 6: jsConsole.writeLine("six"); break;
+                case 7: jsConsole.writeLine("seven"); break;
+                case 8: jsConsole.writeLine("eight"); break;
+                case 9: jsConsole.writeLine("nine"); break;
+                default:
+            }
+        }
+    </script>
+</body>
+</html>

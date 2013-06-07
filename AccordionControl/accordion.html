@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Accordion</title>
+    <style>
+        .accordion ul{
+            list-style-type: none;
+            padding: 0;
+            margin: 15px;
+        }
+        .accordion > ul {
+            width: 250px;
+        }
+            .accordion ul li {
+                border: 1px solid black;        
+                background-color: lightgray;
+                text-align: center;
+            }
+                .accordion ul li a {
+                    color: black;
+                    text-decoration: none;
+                }
+                    .accordion ul li:hover > a {
+                        color: white;
+                    }
+    </style>
+</head>
+<body>
+    <div class="accordion" id="accordion-holder"></div>
+    <div class="accordion" id="copied-accordion-holder"></div>
+    <script src="accordion.js"></script>
+    <script src="local-storage-extensions.js"></script>
+    <script>
+        var accordion = controls.getAccordion("#accordion-holder");
+        var webItem = accordion.add("Web");
+            var subWebItem = webItem.add("HTML");
+                subWebItem.add("v4.1");
+                subWebItem.add("v5");           
+            webItem.add("CSS");
+            webItem.add("JavaScript");
+            webItem.add("jQuery");
+            webItem.add("ASP.NET MVC");
+        accordion.add("Desktop");
+        accordion.add("Mobile");
+        accordion.add("Embedded");
+
+        accordion.render();
+
+        var newItem = accordion.add("Test")
+            newItem.add("Test.1");
+            newItem.add("Test.2");
+            newItem.add("Test.3");
+
+        accordion.render();
+
+        var serialized = accordion.serialize();
+        localStorage.setObject("acc", serialized);
+        
+        var deserializedAccordion = localStorage.getObject("acc");
+        var cloneAccordion = controls.getDeserializedAccordion("#copied-accordion-holder", deserializedAccordion);
+        cloneAccordion.render();
+    </script>
+</body>
+</html>

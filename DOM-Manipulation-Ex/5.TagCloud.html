@@ -1,0 +1,76 @@
+﻿<!--TASK CONDITIONS:
+Create a tag cloud:
+Visualize a string of tags (strings) in a given container
+By given minFontSize and maxFontSize, generate the tags with different font-size, depending on the number of occurrences-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Tag cloud</title>
+</head>
+<body>
+
+    <script>
+        var tags = ["cms", "javascript", "js", "ASP.NET MVC", ".net", ".net", "css", "wordpress", "xaml", "js", "http", "web", "asp.net", "asp.net MVC", "ASP.NET MVC", "wp", "javascript", "js", "cms", "html", "javascript", "http", "http", "CMS"];
+        generateTagCloud(tags, 10, 30);
+
+        function generateTagCloud(tags, minFontSize, maxFontSize) {
+
+            var tagsLength = tags.length;
+            var objectTags = [];
+            var isFound = false;
+
+            for (var i = 0; i < tagsLength; i++) {
+                var currentTag = tags[i].toLowerCase();
+
+                for (var j = 0; j < objectTags.length; j++) {
+                    if (objectTags[j].tag == currentTag) {
+                        objectTags[j].value++;
+                        isFound = true;
+                    }
+                }
+
+                if (!isFound) objectTags.push({ tag: currentTag, value: 1 });
+
+                isFound = false;
+            }
+            
+            objectTags.sort(function (x, y) { return y.value - x.value; });
+
+            var tagsValues = [];
+            for (var i = 0; i < objectTags.length; i++) {
+                for (var j = 0; j < tagsValues.length; j++) {
+                    if (objectTags[i].value == tagsValues[j]) isFound = true;
+                }
+
+                if (!isFound) tagsValues.push(objectTags[i].value);
+
+                isFound = false;
+            }
+
+            var maxTagValue = tagsValues[0];
+            for (var i = 1; i < tagsValues.length; i++) {
+                if (tagsValues[i] > maxTagValue) maxTagValue = tagsValues[i];
+            }
+
+            var multiplier = (maxFontSize - minFontSize) / maxTagValue;
+
+            var div = document.createElement("div");
+            div.style.maxWidth = "200px";
+            div.style.minHeight = "200px";
+            div.style.border = "2px solid black";
+            div.style.borderRadius = "20px";
+            div.style.wordWrap = "break-word";
+
+            var span = document.createElement("span");
+
+            document.body.appendChild(div);
+
+            for (var i = 0; i < objectTags.length; i++) {
+                span.style.fontSize = minFontSize + multiplier * objectTags[i].value + "px";
+                span.innerHTML = objectTags[i].tag + "&nbsp";
+                div.appendChild(span.cloneNode(true));
+            }
+        }
+    </script>
+</body>
+</html>

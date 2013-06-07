@@ -1,0 +1,36 @@
+﻿<!--TASK CONDITIONS:
+Write a function that checks if a given object contains a given property-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>If object contains given property</title>
+	<link type="text/css" href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+	<script>
+
+	    function isPropertyInTheObject(property, object) {
+	        for (key in object) {
+	            if (key == property) {
+	                return true;
+	            }
+	            else {
+	                return false;
+	            }
+	        }
+	    }
+
+	    var person = {
+	        firstName: "Ivan",
+	        lastName: "Ivanov",
+	        EGN: 8586879091
+	    }
+
+	    var givenProperty = "firstName";
+
+	    jsConsole.writeLine(isPropertyInTheObject(givenProperty, person));
+	</script>
+</body>
+</html>

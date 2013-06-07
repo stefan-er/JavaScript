@@ -1,0 +1,88 @@
+﻿<!--TASK CONDITIONS:
+Write a script that creates 5 div elements and moves them in circular path with interval of 100 milliseconds-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Five divs in circle</title>
+</head>
+<body>
+    <a href="#" id="btn-start-circle" onclick="onStartCircleDivButtonClick(event)">Start</a>
+    <a href="#" id="btn-stop-circle" onclick="onStopCircleDivButtonClick(event)">Stop</a>
+    <div id="content">
+    </div>
+	<script>
+	    var timer;
+	    var count = 5;	    
+	    var divContent = document.getElementById("content");
+	    var div = document.createElement("div");
+	    div.style.position = "absolute";
+	    div.style.height = "50px";
+	    div.style.width = "50px";
+	    div.style.borderRadius = "50%";
+	    div.style.border = "2px solid black";
+	    
+	    var colors = ["red", "yellow", "green", "orange", "blue"];
+
+	    for (var i = 0; i < count; i++) {
+	        div.style.backgroundColor = colors[i];
+	        divContent.appendChild(div.cloneNode(true));
+	    }
+
+	    var divCollection = [];
+	    divCollection[0] = divContent.firstChild;
+	    while (!(divCollection[0] instanceof HTMLElement)) {
+	        divCollection[0] = divCollection[0].nextSibling;
+	    }
+	    
+	    for (var i = 1; i < count; i++) {
+	        divCollection[i] = divCollection[i - 1].nextSibling;
+	    }
+
+	    for (var i = 0, deg = 180; i < count; i++, deg += 72) {
+	        positionInCircle(divCollection[i], 100, 400, 200, deg);
+	    }
+
+	    var nextDegree = 180;
+	    
+	    function onStartCircleDivButtonClick(e) {
+	        if (!e) e = window.event;
+
+	        timer = setInterval(function () {
+	            var docFragment = document.createDocumentFragment();
+	            
+	            nextDegree += 5;
+	            for (var i = 0; i < count; i++, nextDegree += 72) {
+	                positionInCircle(divCollection[i], 100, 400, 200, nextDegree);
+                    docFragment.appendChild(divCollection[i])
+	            }
+	            divContent.appendChild(docFragment);
+	            }, 100);
+
+	        if (e.preventDefault) {
+	            e.preventDefault();
+	        }
+	        return false;
+	    }
+
+	    function onStopCircleDivButtonClick(e) {
+	        if (!e) e = window.event;
+
+	        clearInterval(timer);
+	        document.getElementById("btn-stop-circle").disabled = true;
+
+	        if (e.preventDefault) {
+	            e.preventDefault();
+	        }
+	        return false;
+	    }
+
+	    function positionInCircle (htmlEl, radius, centerX, centerY, degrees) {
+	        var x = centerY + radius * Math.cos(degrees * Math.PI / 180);
+	        var y = centerX + radius * Math.sin(degrees * Math.PI / 180);
+
+	        htmlEl.style.top = x + "px";
+	        htmlEl.style.left = y + "px";
+	    }
+	</script>
+</body>
+</html>

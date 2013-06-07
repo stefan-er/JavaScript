@@ -1,0 +1,55 @@
+﻿<!--TASK CONDITIONS:
+Write a function that makes a deep copy of an object
+The function should work for both primitive and reference types-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>DeepCoppyOfAnObject</title>
+    <link type="text/css" href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+    <script>
+
+        var person = {
+            firstName: "Ivan",
+            lastName: "Ivanov",
+            EGN: 8586879091
+        }
+        var newPerson = deepCopy(person);
+        jsConsole.writeLine(newPerson.firstName + " " + newPerson.lastName + " " + newPerson.EGN);
+
+        var number = 5;
+        var newNumber = deepCopy(number);
+        jsConsole.writeLine(newNumber);
+
+        var arr = [1, 2, 3];
+        var newArr = deepCopy(arr);
+        for (var i = 0; i < newArr.length; i++) {
+            jsConsole.write(newArr[i]);
+        }
+
+
+        function deepCopy(originalObject) {
+            if (originalObject == null || typeof originalObject != "Object") {
+                var newObject = originalObject;
+                return originalObject;
+            }
+
+            if (typeof originalObject == "Object") {
+                var newObject = new Object();
+
+                for (key in originalObject) {
+                    newObject[key] = originalObject[key];
+                    if ((typeof newObject[key]) == "Object") {
+                        deepCopy(object[key]);
+                    }
+                }
+                return newObject;
+            }            
+        }
+
+    </script>
+</body>
+</html>

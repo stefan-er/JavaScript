@@ -1,0 +1,30 @@
+﻿<!--TASK CONDITIONS:
+Create a text area and two inputs with type="color"
+Make the font color of the text area as the value of the first color input
+Make the background color of the text area as the value of the second input-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Text area colors</title>
+</head>
+<body>
+    <label for="font-colr">Enter font color: </label>
+    <input type="color" id="textarea-fontColor" name="font-color"/>
+    <label for="background-color">Enter background color: </label>
+    <input type="color" id="textarea-backgroundColor" name="background-color"/>
+    <a href="#" id="btn-colors" onclick="getColorsBtnClick()">Get colors</a>
+    <br />
+    <br />
+    <textarea id="textarea" cols="70" rows="20"></textarea>
+
+    <script>
+        function getColorsBtnClick() {
+            var fontColor = document.getElementById("textarea-fontColor").value;
+            var backgroundColor = document.getElementById("textarea-backgroundColor").value;
+            var textarea = document.getElementById("textarea");
+            textarea.style.color = fontColor;
+            textarea.style.backgroundColor = backgroundColor;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+﻿<!--TASK CONDITIONS:
+Write a function that groups an array of persons by age, first or last name. The function must return an associative array, with keys - the groups, and values -arrays with persons in this groups
+Use function overloading (i.e. just one function)-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Group an array of persons</title>
+<link type="text/css" href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+	<script>
+
+	    var persons = [
+        { firstname: "Gosho", lastname: "Petrov", age: 25 },
+        { firstname: "Gosho", lastname: "Ivanov", age: 81 },
+        { firstname: "Ivan", lastname: "Ivanov", age: 25 },
+        { firstname: "Petko", lastname: "Petkov", age: 81 }];
+
+	    var groupByAge = groupByProperty(persons, "age");
+	    for (var i in groupByAge) {
+	        jsConsole.writeLine(i + " => " + groupByAge[i]);
+	    }
+
+	    var groupByFirstName = groupByProperty(persons, "firstname");
+	    for (var i in groupByFirstName) {
+	        jsConsole.writeLine(i + " => " + groupByFirstName[i]);
+	    }
+
+	    var groupByLastName = groupByProperty(persons, "lastname");
+	    for (var i in groupByLastName) {
+	        jsConsole.writeLine(i + " => " + groupByLastName[i]);
+	    }
+
+
+	    function groupByProperty(array, property) {
+
+	        var arrayNew = new Array();
+	        for (var i = 0; i < array.length; i++) {
+	            for (var j in array[i]) {
+	                if (j == property) {
+	                    arrayNew.push(array[i][j]);
+	                }
+	            }
+	        }
+
+            var propertyCount = {};
+            var person = {};
+            for (var i in arrayNew) {
+                person = arrayNew[i];
+                if (propertyCount[person]) {
+                    propertyCount[person]++;
+                }
+                else {
+                    propertyCount[person] = 1;
+                }
+            }
+
+            return propertyCount;
+	    }
+
+	</script>
+</body>
+</html>

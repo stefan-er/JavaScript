@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>GridView Control</title>
+    <script src="scripts/gridView.js"></script>
+    <script src="scripts/string-escaping-extension.js"></script>
+    <style>
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            border: 1px solid black;
+        }
+        th {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+<body>
+    <div id="grid-view-holder"></div>
+    <script>
+        var schoolsGrid = controls.getGridView("#grid-view-holder");
+        schoolsGrid.addHeader("Name </br>", "Location", "Total Students", "Specialty");
+        schoolsGrid.addRow("PMG", "Burgas", 400, "Math");
+        schoolsGrid.addRow("TUES", "Sofia", 500, "IT");
+        academyRow = schoolsGrid.addRow("Academy", "Sofia", 5000, "IT");
+        schoolsGrid.render();
+
+        var academyRow = schoolsGrid.addRow("Academy", "Sofia", 5000, "IT");
+        var academyGrid = academyRow.getNestedGridView();
+        academyRow.render();
+        academyGrid.addHeader("Title", "Start Date", "Total Students");
+        academyGrid.addRow("JS 2", "11-april-2013", "400");
+        academyGrid.render();
+        
+    </script>
+</body>
+</html>

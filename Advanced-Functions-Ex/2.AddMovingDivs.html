@@ -1,0 +1,112 @@
+﻿<!--TASK CONDITIONS:
+Create a module that works with moving div elements. Implement functionality for:
+Add new moving div element to the DOM
+The module should generate random background, font and border colors
+All the div elements are with the same width and height
+The movements of the div elements can be either circular or rectangular
+The elements should be moving all the time-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Add moving divs</title>
+</head>
+<body>
+    <div id="content"></div>
+    <script>
+        (function () {
+            'use strict';
+
+            var movingShapes = (function () {
+
+                var divContent = document.getElementById("content");
+                var div = document.createElement("div");
+                div.innerHTML = "DIV";
+                div.style.textAlign = "center";
+                div.style.fontWeight = "bold";
+                div.style.position = "absolute";
+                div.style.height = "50px";
+                div.style.width = "50px";
+                div.style.borderRadius = "50%";
+                div.style.borderWidth = "2px";
+                div.style.borderStyle = "solid";
+                div.style.backgroundColor = generateRandomColor();
+                div.style.borderColor = generateRandomColor();
+                div.style.color = generateRandomColor();
+
+                function add(movement) {
+                    if (movement == "ellipse") {
+                        var radius = getRandomInt(30, 100);
+                        var centerX = getRandomInt(100, 400);
+                        var centerY = getRandomInt(100, 400);
+                        var nextDegree = 180;
+                        var newDiv = div.cloneNode(true);
+
+                        setInterval(function () {
+                            nextDegree += 1;
+                            positionInCircle(newDiv, radius, centerX, centerY, nextDegree);
+                            divContent.appendChild(newDiv);
+                        }, 10);
+                    }
+
+                    else if (movement == "rect") {
+                        var topPos = getRandomInt(10, 200);
+                        var leftPos = getRandomInt(10, 200);
+                        var startTopPos = topPos;
+                        var startLeftPos = leftPos;
+                        var side1 = getRandomInt(100, 300);
+                        var side2 = getRandomInt(100, 300);
+                        div.style.top = startTopPos + "px";
+                        div.style.left = startLeftPos + "px";
+                        divContent.appendChild(div);
+
+                        setInterval(function () {
+                            if (topPos <= startTopPos + side1 && leftPos == startLeftPos) {
+                                topPos++;
+                            }
+                            else if (leftPos <= startLeftPos + side2 && topPos == startTopPos + side1 + 1) {
+                                leftPos++;
+                            }
+                            else if (topPos >= startTopPos && leftPos == startLeftPos + side2 + 1) {
+                                topPos--;
+                            }
+                            else if (leftPos >= startLeftPos && topPos == startTopPos - 1) {
+                                leftPos--;
+                            }
+
+                            div.style.top = topPos + "px";
+                            div.style.left = leftPos + "px";
+                        }, 10)
+                    }
+                }
+
+                function positionInCircle(htmlEl, radius, centerX, centerY, degrees) {
+                    var x = centerY + radius * Math.cos(degrees * Math.PI / 180);
+                    var y = centerX + radius * Math.sin(degrees * Math.PI / 180);
+
+                    htmlEl.style.top = x + "px";
+                    htmlEl.style.left = y + "px";
+                }
+
+                function getRandomInt(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+
+                function generateRandomColor() {
+                    var red = (Math.random() * 256) | 0;
+                    var green = (Math.random() * 256) | 0;
+                    var blue = (Math.random() * 256) | 0;
+
+                    return "rgb(" + red + "," + green + "," + blue + ")";
+                }
+
+                return {
+                    add: add
+                }
+            })();
+
+            movingShapes.add("rect");
+            movingShapes.add("ellipse");
+        })();
+    </script>
+</body>
+</html>
